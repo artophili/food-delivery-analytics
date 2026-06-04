@@ -1,0 +1,17 @@
+# Ignore raw and processed data files (Link to sources in README instead)
+data/*.csv
+data/*.xlsx
+data/*.json
+
+# Python environment artifacts
+__pycache__/
+*.pyc
+.env
+.venv/
+env/
+venv/
+.ipynb_checkpoints/
+
+# OS specific files
+.DS_Store
+Thumbs.db
