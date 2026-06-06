@@ -122,5 +122,25 @@ GROUP BY order_date;
 
 SELECT * FROM dim_date;
 	
-	
+INSERT INTO fact_swiggy_orders (    
+    order_id, rider_id, location_id, order_date, order_time, 
+    allot_time, accept_time, pickup_time, delivered_time, cancelled, 
+    session_time, cancelled_time, reassignment_method, reassignment_reason, reassigned_order
+)
+SELECT 
+    order_id, rider_id, location_id, order_date::DATE,
+    TO_TIMESTAMP(order_time, 'DD-MM-YYYY HH24:MI'),
+    TO_TIMESTAMP(allot_time, 'DD-MM-YYYY HH24:MI'),
+    TO_TIMESTAMP(accept_time, 'DD-MM-YYYY HH24:MI'),
+    TO_TIMESTAMP(pickup_time, 'DD-MM-YYYY HH24:MI'),
+    TO_TIMESTAMP(delivered_time, 'DD-MM-YYYY HH24:MI'),
+    cancelled, COALESCE(session_time, 0)::NUMERIC,
+    TO_TIMESTAMP(cancelled_time, 'DD-MM-YYYY HH24:MI'),
+    COALESCE(reassignment_method, 'Not Reassigned'),
+    COALESCE(reassignment_reason, 'Not Reassigned'),
+    reassigned_order
+FROM stg_swiggy_orders
+ON CONFLICT (order_id) DO NOTHING;
+
+SELECT * FROM fact_swiggy_orders;
 
