@@ -77,3 +77,21 @@ WHERE f.cancelled = 1
   AND f.accept_time IS NOT NULL
 GROUP BY 1
 ORDER BY total_cancelled_orders DESC;
+
+
+--Experienced rider test
+SELECT * FROM dim_riders;
+SELECT * FROM fact_swiggy_orders;
+
+SELECT 
+	CASE
+		WHEN r.lifetime_order_count < 10 THEN 'New Rider'
+		ELSE 'Experienced Rider'
+	END AS Rider_experience,
+	ROUND(AVG(EXTRACT(EPOCH FROM (f.delivered_time - f.accept_time)) / 60)::NUMERIC, 2) AS avg_mins_for_delivery
+FROM fact_swiggy_orders f
+JOIN dim_riders r ON f.rider_id = r.rider_id
+GROUP BY 1
+ORDER BY avg_mins_for_delivery DESC;
+	
+
