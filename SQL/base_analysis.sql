@@ -82,6 +82,7 @@ ORDER BY total_cancelled_orders DESC;
 --Experienced rider test
 SELECT * FROM dim_riders;
 SELECT * FROM fact_swiggy_orders;
+SELECT * FROM dim_geography;
 
 SELECT 
 	CASE
@@ -93,5 +94,34 @@ FROM fact_swiggy_orders f
 JOIN dim_riders r ON f.rider_id = r.rider_id
 GROUP BY 1
 ORDER BY avg_mins_for_delivery DESC;
+
+--Query to check the travel mins and total trip mins
+SELECT 
+    CASE
+        WHEN r.lifetime_order_count < 10 THEN 'New Rider'
+        ELSE 'Experienced Rider'
+    END AS Rider_experience,
+    COUNT(f.order_id) AS total_orders,
+    -- Checking pure driving/navigation time
+    ROUND(AVG(EXTRACT(EPOCH FROM (f.delivered_time - f.pickup_time)) / 60)::NUMERIC, 2) AS avg_driving_mins,
+    -- Checking total trip time from acceptance to delivery
+    ROUND(AVG(EXTRACT(EPOCH FROM (f.delivered_time - f.accept_time)) / 60)::NUMERIC, 2) AS avg_total_trip_mins
+FROM fact_swiggy_orders f
+JOIN dim_riders r ON f.rider_id = r.rider_id
+WHERE f.delivered_time IS NOT NULL AND f.pickup_time IS NOT NULL
+GROUP BY 1
+ORDER BY avg_driving_mins DESC;
 	
+
+SELECT 
+    CASE 
+        WHEN g.last_mile_distance <= 1 THEN '0-1 miles (Very Close)'
+        WHEN g.last_mile_distance > 1 AND g.last_mile_distance <= 3 THEN '1-3 miles (Moderate)'
+        ELSE '3+ km (Long Distance)'
+    END AS rider_to_restaurant_distance,
+	COUNT(f.order_id) AS total_cancelled_orders
+FROM fact_swiggy_orders f
+JOIN dim_geography g ON f.location_id = g.location_id
+WHERE f.cancelled = 1
+GROUP BY 1;
 

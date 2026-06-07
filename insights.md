@@ -52,3 +52,23 @@ The Hidden Platform Risk: Experienced drivers handle over 99% of all deliveries 
 
 Strategic Recommendation:
 Gamified Onboarding & Routing Help: New riders need extra assistance during their first 10–20 trips. The app should provide them with high-accuracy internal mall maps for restaurant pickups and specific gate-entry notes for large apartment complexes to help close that 12-minute navigation gap faster.
+
+
+How Delivery Distance Affects Order Failure
+We analyzed how the distance from the restaurant to the customer (last-mile distance) impacts the risk of an order being cancelled.
+
+The data shows a clear trend: the further away a customer lives, the higher the chance of the order failing.
+
+0–1 km (Very Close): Only 633 total cancellations.
+
+1–3 km (Moderate): Increases to 1,950 cancellations.
+
+3+ km (Long Distance): Spikes to 2,634 cancellations.
+
+What this means:
+Long-distance deliveries are the most fragile orders on the platform. When a customer orders from a restaurant over 3 kilometers away, the delivery timeline faces a compounding delay: the driver has to travel further to get to the restaurant, the kitchen takes time to cook, and the driver has a longer transit leg to the customer's house.
+
+Because the total time often stretches past 45 minutes, it triggers a high cancellation rate. Riders are more likely to drop these long assignments if they feel the payout isn't worth the mileage, and customers are more likely to cancel out of frustration.
+
+Strategic Recommendation:
+Distance-Based Cancellation Penalties & Higher Rider Payouts: To protect long-distance orders, the platform should increase the driver payout for trips over 3 km to ensure riders don't reject them. Additionally, the app should shorten the "free cancellation" window for customers on long-distance orders once the rider is already in transit.
