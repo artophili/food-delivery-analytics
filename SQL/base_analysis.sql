@@ -125,3 +125,4 @@ JOIN dim_geography g ON f.location_id = g.location_id
 WHERE f.cancelled = 1
 GROUP BY 1;
 
+	

@@ -72,3 +72,6 @@ Because the total time often stretches past 45 minutes, it triggers a high cance
 
 Strategic Recommendation:
 Distance-Based Cancellation Penalties & Higher Rider Payouts: To protect long-distance orders, the platform should increase the driver payout for trips over 3 km to ensure riders don't reject them. Additionally, the app should shorten the "free cancellation" window for customers on long-distance orders once the rider is already in transit.
+
+Tableau Dashboard - 
+https://public.tableau.com/views/Food_delivery_analysis/Dashboard1?:language=en-GB&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link
